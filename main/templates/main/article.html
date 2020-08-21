@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<title>{{ article.title }}</title>
+    <h1>{{ article.title }}</h1>
+    <h3>{{ article.author }} - {{ article.pub_date | date:"d בF Y" }}</h3>
+    <h4>{{ article.text | safe }}</h4>
+<div>
+<p>יש למאמר זה <strong><span id="total_votes">{{article.votes}}</span></strong> הצבעות</p>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <button id="vote" class="button">הצבע</button>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $("#vote").click(function (e) {
+          e.preventDefault()
+          var upvotes = $("#total_votes").html()
+          var updatedUpVotes = parseInt(upvotes) + 1
+          $("#total_votes").html(updatedUpVotes)
+          $.ajax({
+            url: 'vote/',
+            method: "GET",
+            data: {},
+            success: function (data) {
+              console.log(data)
+            },
+            error: function (error) {
+              console.log(error)
+            }
+          })
+        })
+      </script>
+</div>
+{% endblock content %}

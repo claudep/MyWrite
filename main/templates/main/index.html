@@ -1,0 +1,31 @@
+{% include 'base.html'%}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock head %}
+{% block header %}
+<header>
+</header>
+{% endblock header %}
+    {% block content %}
+    <body>
+    <title>זאת זכותך לכתוב</title>
+    {% if latest_article_list %}
+    {% for article in latest_article_list %}
+    <div id="article-box" class="callout-primary"> 
+        <a id="box-link" href="/{{ article.id }}/">
+                <h1>{{article.title}}</h1>
+                <div>
+                    <h2>{{article.author}} - {{ article.pub_date | date:"d בF Y" }}</h3>
+                </div>
+                <div id="desription" class="callout primary">
+                    <p>{{article.text}}</p>
+                </div>
+    </a>
+    </div>
+    {% endfor %} 
+{% else %}
+    <p>אין מאמרים זמינים כרגע...</p>
+{% endif %}
+</body>
+{% endblock content %}

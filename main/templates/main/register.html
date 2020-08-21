@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{% block content %}
+{% load crispy_forms_tags %}
+<h2>הירשם</h2>
+<br>
+<form method="post"> {% csrf_token %}
+  {{ form|crispy }}
+  {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+  <label for="remember">Remember me</label>
+              <button type="submit">הירשם</button>
+</form>
+אם יש לך חשבון <a href="/login" target="blank"><strong>היכנס</strong></a> במקום.
+{% endblock %}

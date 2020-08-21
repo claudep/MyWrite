@@ -1,0 +1,21 @@
+{% include 'base.html'%}
+    {% block content %}
+    {% if article_list %}
+        {% for article in article_list %}
+        <div id="article-box" class="callout"> 
+            <a id="box-link" href="/{{ article.id }}/">
+                    <h1>{{article.title}}</h1>
+                    <div>
+                        <h2>{{article.author}} - {{ article.pub_date | date:"d בF Y" }}</h3>
+                    </div>
+                    <div id="desription" class="callout primary">
+                        <p>{{article.text | safe}}</p>
+                    </div>
+        </a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>אין מאמרים שתואמים לחיפוש שלך</p>
+    {% endif %}
+        {% endblock %}
+  
